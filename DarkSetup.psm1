@@ -60,13 +60,15 @@ function Handle-Profile {
         New-Item -Path $PROFILE -ItemType File -Force
     }
 
-    $profileContainsText = Select-String -Path $PROFILE -Pattern "$($configItem.PwshProfile)" -SimpleMatch
+    foreach ($line in $configItem.PwshProfile){
+        $profileContainsText = Select-String -Path $PROFILE -Pattern "$line" -SimpleMatch
 
     if ($null -eq $profileContainsText){
-        Write-Host "Appending '$($configItem.PwshProfile)' to pwsh profile"
-        Add-Content -Path $PROFILE -Value $configItem.PwshProfile
+        Write-Host "Appending '$line' to pwsh profile"
+        Add-Content -Path $PROFILE -Value $line
     } else {
-        Write-Host "'$($configItem.PwshProfile)' is already part of pwsh profile"
+        Write-Host "'$line' is already part of pwsh profile"
+    }
     }
     
 }
