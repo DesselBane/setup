@@ -10,7 +10,7 @@ function Install-Font {
     $fonts = (New-Object -ComObject Shell.Application).Namespace(0x14)
     Get-ChildItem $fontDir `
     | Where-Object { $_.Name -match "(t|o)tf$" } `
-    | ForEach-Object { Write-Host "installing $_" <# $fonts.CopyHere($_.FullName) #> }
+    | ForEach-Object { $fonts.CopyHere($_.FullName) }
     
 }
 Export-ModuleMember -Function Install-Font
@@ -20,7 +20,7 @@ function Install-Programm {
         [string]
         $programmId
     )
-    Write-Output "winget install $programmId --accept-package-agreements --accept-source-agreements"
+    winget install $programmId --accept-package-agreements --accept-source-agreements
 }
 Export-ModuleMember -Function Install-Programm
 
@@ -35,12 +35,12 @@ function Handle-Fonts {
         $outFolder = "$id.$ii"
         $outName = "$outFolder.zip"
 
-        Write-Output "Invoke-WebRequest $configItem.Fonts[$ii] -OutFile $outName"
-        Write-Output "Expand-Archive $outName"
-        Write-Output "Install-Font -fontDir $outFolder"
+        Invoke-WebRequest $configItem.Fonts[$ii] -OutFile $outName
+        Expand-Archive $outName
+        Install-Font -fontDir $outFolder
 
-        Write-Output "Remove-Item -Recurse -Force $outFolder"
-        Write-Output "Remove-Item -Force $outName"
+        Remove-Item -Recurse -Force $outFolder
+        Remove-Item -Force $outName
     }
 }
 
@@ -49,7 +49,7 @@ function Handle-Profile {
         $configItem
     )
 
-    if($null -eq $configItem.PwshProfile){
+    if ($null -eq $configItem.PwshProfile) {
         return
     }
 
@@ -60,15 +60,16 @@ function Handle-Profile {
         New-Item -Path $PROFILE -ItemType File -Force
     }
 
-    foreach ($line in $configItem.PwshProfile){
+    foreach ($line in $configItem.PwshProfile) {
         $profileContainsText = Select-String -Path $PROFILE -Pattern "$line" -SimpleMatch
 
-    if ($null -eq $profileContainsText){
-        Write-Host "Appending '$line' to pwsh profile"
-        Add-Content -Path $PROFILE -Value $line
-    } else {
-        Write-Host "'$line' is already part of pwsh profile"
-    }
+        if ($null -eq $profileContainsText) {
+            Write-Host "Appending '$line' to pwsh profile"
+            Add-Content -Path $PROFILE -Value $line
+        }
+        else {
+            Write-Host "'$line' is already part of pwsh profile"
+        }
     }
     
 }
