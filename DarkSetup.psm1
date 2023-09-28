@@ -98,6 +98,29 @@ function Handle-EnvVars {
     return $configItem
 }
 
+function Handle-ConfigFiles {
+    param (
+        [Parameter(Position = 1, Mandatory = $true, ValueFromPipeline = $true)]
+        $configItem
+    )
+
+    if($null -eq $configItem.ConfigFiles){
+        return $configItem
+    }
+    
+    foreach ($file in $configItem.ConfigFiles){
+        if ($file.Type -ne "Raw"){
+            Write-Error "Currently only Raw config files are supported"
+            return $configItem
+        }
+
+        $path = $ExecutionContext.InvokeCommand.ExpandString($file.Path)
+
+        Out-File -FilePath $path -InputObject $file.Value -Force
+    }
+
+    return $configItem
+}
 function SetupFromConfig {
     param (
         [string]
@@ -121,6 +144,7 @@ function SetupFromConfig {
         | Handle-Profile `
         | Handle-Fonts `
         | Handle-EnvVars `
+        | Handle-ConfigFiles `
         | Out-Null
 
         Write-Host "Installed $($configItem.Name)"

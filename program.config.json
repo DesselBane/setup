@@ -1,10 +1,13 @@
 [
     {
         "Name": "Test",
-        "EnvVars": {
-            "Foo": "BAR",
-            "Bar": "baz"
-        }
+        "ConfigFiles":[
+            {
+                "Type":"Raw",
+                "Value":"{ \"Key\": \"Value\"}",
+                "Path": "$env:APPDATA\\Code\\User\\settings2.json"
+            }
+        ]
     },
     {
         "Name": "Windows Terminal",
