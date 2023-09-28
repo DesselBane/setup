@@ -1,4 +1,4 @@
-Import-Module ps-menu
+Import-Module InteractiveMenu
 
 function Install-Font {
     param(
@@ -81,12 +81,11 @@ function SetupFromConfig {
     )
     $config = Get-Content -Path $configPath | ConvertFrom-Json
 
-    $menuChoices = $config | Select-Object -ExpandProperty Name
-    $options = Menu $menuChoices -ReturnIndex -Multiselect 
+    $menuItems = $config | ForEach-Object {$i=0} { Get-InteractiveMultiMenuOption -Item $_ -Label $_.Name -Order $i; $i++ }
 
-    foreach ($i in $options) {
-        $configItem = $config[$i]
+    $options = Get-InteractiveMenuUserSelection -Header "What should be installed?" -Items $menuItems
 
+    foreach ($configItem in $options) {
         Install-Programm -programmId $configItem.Id
 
         Handle-Fonts -configItem $configItem
