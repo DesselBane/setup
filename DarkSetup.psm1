@@ -1,34 +1,32 @@
 Import-Module InteractiveMenu
 
-function Install-Font {
-    param(
-        [string]
-        $fontDir
-    )
-
-    Write-Host "Installing fonts of folder $fontDir"
-    $fonts = (New-Object -ComObject Shell.Application).Namespace(0x14)
-    Get-ChildItem $fontDir `
-    | Where-Object { $_.Name -match "(t|o)tf$" } `
-    | ForEach-Object { $fonts.CopyHere($_.FullName) }
-    
-}
-Export-ModuleMember -Function Install-Font
-
-function Install-Programm {
+function Handle-Winget {
     param (
-        [string]
-        $programmId
+        [Parameter(Position = 1, Mandatory = $true, ValueFromPipeline = $true)]
+        $configItem
     )
-    winget install $programmId --accept-package-agreements --accept-source-agreements
+
+    if ($null -eq $configItem.Winget) {
+        return $configItem
+    }
+
+    winget install $configItem.Winget.Id --accept-package-agreements --accept-source-agreements
+
+    return $configItem
 }
-Export-ModuleMember -Function Install-Programm
 
 function Handle-Fonts {
     param(
+        [Parameter(Position = 1, Mandatory = $true, ValueFromPipeline = $true)]
         $configItem
     )
+
+    if ($null -eq $configItem.Fonts) {
+        return $configItem
+    }
+
     $id = $configItem.Id
+    $fonts = (New-Object -ComObject Shell.Application).Namespace(0x14)
 
 
     for ($ii = 0; $ii -lt $configItem.Fonts.Length; $ii++) {
@@ -37,20 +35,27 @@ function Handle-Fonts {
 
         Invoke-WebRequest $configItem.Fonts[$ii] -OutFile $outName
         Expand-Archive $outName
-        Install-Font -fontDir $outFolder
+
+        Write-Host "Installing fonts of folder $outFolder"
+        Get-ChildItem $outFolder `
+        | Where-Object { $_.Name -match "(t|o)tf$" } `
+        | ForEach-Object { $fonts.CopyHere($_.FullName) }
 
         Remove-Item -Recurse -Force $outFolder
         Remove-Item -Force $outName
     }
+
+    return $configItem
 }
 
 function Handle-Profile {
     param (
+        [Parameter(Position = 1, Mandatory = $true, ValueFromPipeline = $true)]
         $configItem
     )
 
     if ($null -eq $configItem.PwshProfile) {
-        return
+        return $configItem
     }
 
     $exists = [System.IO.File]::Exists($PROFILE)
@@ -72,6 +77,25 @@ function Handle-Profile {
         }
     }
     
+    return $configItem
+}
+
+function Handle-EnvVars {
+    param (
+        [Parameter(Position = 1, Mandatory = $true, ValueFromPipeline = $true)]
+        $configItem
+    )
+
+    if ($null -eq $configItem.EnvVars) {
+        return $configItem
+    }
+    
+    foreach ($item in $configItem.EnvVars.PSObject.Properties) {
+        Write-Host "Setting user scoped environment variable '$($item.Name)' to value '$($item.Value)'"
+        [System.Environment]::SetEnvironmentVariable($item.Name, $item.Value, [System.EnvironmentVariableTarget]::User)
+    }
+
+    return $configItem
 }
 
 function SetupFromConfig {
@@ -81,15 +105,25 @@ function SetupFromConfig {
     )
     $config = Get-Content -Path $configPath | ConvertFrom-Json
 
-    $menuItems = $config | ForEach-Object {$i=0} { Get-InteractiveMultiMenuOption -Item $_ -Label $_.Name -Order $i; $i++ }
+    $menuItems = $config | ForEach-Object { $i = 0 } { 
+        Get-InteractiveMultiMenuOption -Item $_ `
+            -Label $_.Name `
+            -Order $i `
+            -Info $(ConvertTo-Json -InputObject $_ -Depth 10);
+        $i++ 
+    }
 
     $options = Get-InteractiveMenuUserSelection -Header "What should be installed?" -Items $menuItems
 
     foreach ($configItem in $options) {
-        Install-Programm -programmId $configItem.Id
+        $configItem `
+        | Handle-Winget `
+        | Handle-Profile `
+        | Handle-Fonts `
+        | Handle-EnvVars `
+        | Out-Null
 
-        Handle-Fonts -configItem $configItem
-        Handle-Profile -configItem $configItem
+        Write-Host "Installed $($configItem.Name)"
     }
 }
 Export-ModuleMember -Function SetupFromConfig

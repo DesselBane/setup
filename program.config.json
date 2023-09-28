@@ -1,0 +1,51 @@
+[
+    {
+        "Name": "Test",
+        "EnvVars": {
+            "Foo": "BAR",
+            "Bar": "baz"
+        }
+    },
+    {
+        "Name": "Windows Terminal",
+        "Winget": {
+            "Id": "9N0DX20HK701"
+        }
+    },
+    {
+        "Name": "Powershell 7",
+        "Winget": {
+            "Id": "9MZ1SNWT0N5D"
+        }
+    },
+    {
+        "Name": "Starship",
+        "Winget": {
+            "Id": "Starship.Starship"
+        },
+        "Fonts": [
+            "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/FiraCode.zip",
+            "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/FiraMono.zip"
+        ],
+        "PwshProfile": [
+            "$ENV:STARSHIP_CONFIG = \"$ENV:OneDrive\\Configs\\starship.toml\"",
+            "Invoke-Expression (&starship init powershell)"
+        ]
+    },
+    {
+        "Name": "Visual Studio Code",
+        "Winget": {
+            "Id": "Microsoft.VisualStudioCode"
+        }
+    },
+    {
+        "Name": "Volta",
+        "Winget": {
+            "Id": "Volta.Volta"
+        },
+        "EnvVars": {
+            "VOLTA_FEATURE_PNPM": "1"
+        }
+    }
+    
+]
