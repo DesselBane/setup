@@ -6,6 +6,12 @@
         }
     },
     {
+        "Name": "Windows Terminal Preview",
+        "Winget": {
+            "Id": "9N8G5RFZ9XK3"
+        }
+    },
+    {
         "Name": "Powershell 7",
         "Winget": {
             "Id": "9MZ1SNWT0N5D"
@@ -34,6 +40,72 @@
         },
         "EnvVars": {
             "VOLTA_FEATURE_PNPM": "1"
+        }
+    },
+    {
+        "Name": "7-Zip",
+        "Winget": {
+            "Id": "7zip.7zip"
+        }
+    },
+    {
+        "Name": "JetBrains Toolbox",
+        "Winget": {
+            "Id": "JetBrains.Toolbox"
+        }
+    },
+    {
+        "Name": "Logitech Unifying Software",
+        "Winget": {
+            "Id": "Logitech.UnifyingSoftware"
+        }
+    },
+    {
+        "Name": "Firefox",
+        "Winget": {
+            "Id": "9NZVDKPMR9RD"
+        }
+    },
+    {
+        "Name": "Nextcloud",
+        "Winget": {
+            "Id": "Nextcloud.NextcloudDesktop"
+        }
+    },
+    {
+        "Name": "Notepad++",
+        "Winget": {
+            "Id": "Notepad++.Notepad++"
+        }
+    },
+    {
+        "Name": "Microsoft PowerToys",
+        "Winget": {
+            "Id": "XP89DCGQ3K6VLD"
+        }
+    },
+    {
+        "Name": "Microsoft Remote Desktop",
+        "Winget": {
+            "Id": "9WZDNCRFJ3PS"
+        }
+    },
+    {
+        "Name": "Spotify",
+        "Winget": {
+            "Id": "9NCBCSZSJRSB"
+        }
+    },
+    {
+        "Name": "Telegram",
+        "Winget": {
+            "Id": "Telegram.TelegramDesktop"
+        }
+    },
+    {
+        "Name": "WinDirStat",
+        "Winget": {
+            "Id": "WinDirStat.WinDirStat"
         }
     }
 
