@@ -1,15 +1,5 @@
 [
     {
-        "Name": "Test",
-        "ConfigFiles":[
-            {
-                "Type":"Raw",
-                "Value":"{ \"Key\": \"Value\"}",
-                "Path": "$env:APPDATA\\Code\\User\\settings2.json"
-            }
-        ]
-    },
-    {
         "Name": "Windows Terminal",
         "Winget": {
             "Id": "9N0DX20HK701"
@@ -29,10 +19,6 @@
         "Fonts": [
             "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/FiraCode.zip",
             "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/FiraMono.zip"
-        ],
-        "PwshProfile": [
-            "$ENV:STARSHIP_CONFIG = \"$ENV:OneDrive\\Configs\\starship.toml\"",
-            "Invoke-Expression (&starship init powershell)"
         ]
     },
     {
@@ -50,5 +36,5 @@
             "VOLTA_FEATURE_PNPM": "1"
         }
     }
-    
+
 ]
