@@ -107,6 +107,12 @@
         "Winget": {
             "Id": "WinDirStat.WinDirStat"
         }
+    },
+    {
+        "Name": "Region to Share",
+        "Winget": {
+            "Id": "9N4066W2R5Q4"
+        }
     }
 
 ]
