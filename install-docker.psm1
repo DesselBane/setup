@@ -104,12 +104,15 @@ function Install-DockerLinux {
 
     $distro = "Ubuntu"
 
-    Write-TimeStamped "Setting up distrod"
-    wsl -d $distro -u root curl -L -O "https://raw.githubusercontent.com/nullpo-head/wsl-distrod/v0.1.4/install.sh"
-    wsl -d $distro -u root chmod +x install.sh
-    wsl -d $distro -u root ./install.sh install
-    wsl -d $distro -u root /opt/distrod/bin/distrod enable
-    wsl --terminate $distro
+
+    Write-TimeStamped "TODO setup systemd"
+    # https://devblogs.microsoft.com/commandline/systemd-support-is-now-available-in-wsl/
+    # https://askubuntu.com/questions/1192347/temporary-failure-in-name-resolution-on-wsl
+    #wsl -d $distro -u root curl -L -O "https://raw.githubusercontent.com/nullpo-head/wsl-distrod/v0.1.4/install.sh"
+    #wsl -d $distro -u root chmod +x install.sh
+    #wsl -d $distro -u root ./install.sh install
+    #wsl -d $distro -u root /opt/distrod/bin/distrod enable
+    #wsl --terminate $distro
 
     Write-TimeStamped "Installing docker inside WSL"
     wsl -d $distro -u root apt-get install -y apt-transport-https ca-certificates curl gnupg lsb-release
