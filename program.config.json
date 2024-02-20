@@ -1,118 +1,213 @@
 [
-    {
-        "Name": "Windows Terminal",
-        "Winget": {
-            "Id": "9N0DX20HK701"
-        }
-    },
-    {
-        "Name": "Windows Terminal Preview",
-        "Winget": {
-            "Id": "9N8G5RFZ9XK3"
-        }
-    },
-    {
-        "Name": "Powershell 7",
-        "Winget": {
-            "Id": "9MZ1SNWT0N5D"
-        }
-    },
-    {
-        "Name": "Starship",
-        "Winget": {
-            "Id": "Starship.Starship"
-        },
-        "Fonts": [
-            "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/FiraCode.zip",
-            "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/FiraMono.zip"
-        ]
-    },
-    {
-        "Name": "Visual Studio Code",
-        "Winget": {
-            "Id": "Microsoft.VisualStudioCode"
-        }
-    },
-    {
-        "Name": "Volta",
-        "Winget": {
-            "Id": "Volta.Volta"
-        },
-        "EnvVars": {
-            "VOLTA_FEATURE_PNPM": "1"
-        }
-    },
-    {
-        "Name": "7-Zip",
-        "Winget": {
-            "Id": "7zip.7zip"
-        }
-    },
-    {
-        "Name": "JetBrains Toolbox",
-        "Winget": {
-            "Id": "JetBrains.Toolbox"
-        }
-    },
-    {
-        "Name": "Logitech Unifying Software",
-        "Winget": {
-            "Id": "Logitech.UnifyingSoftware"
-        }
-    },
-    {
-        "Name": "Firefox",
-        "Winget": {
-            "Id": "9NZVDKPMR9RD"
-        }
-    },
-    {
-        "Name": "Nextcloud",
-        "Winget": {
-            "Id": "Nextcloud.NextcloudDesktop"
-        }
-    },
-    {
-        "Name": "Notepad++",
-        "Winget": {
-            "Id": "Notepad++.Notepad++"
-        }
-    },
-    {
-        "Name": "Microsoft PowerToys",
-        "Winget": {
-            "Id": "XP89DCGQ3K6VLD"
-        }
-    },
-    {
-        "Name": "Microsoft Remote Desktop",
-        "Winget": {
-            "Id": "9WZDNCRFJ3PS"
-        }
-    },
-    {
-        "Name": "Spotify",
-        "Winget": {
-            "Id": "9NCBCSZSJRSB"
-        }
-    },
-    {
-        "Name": "Telegram",
-        "Winget": {
-            "Id": "Telegram.TelegramDesktop"
-        }
-    },
-    {
-        "Name": "WinDirStat",
-        "Winget": {
-            "Id": "WinDirStat.WinDirStat"
-        }
-    },
-    {
-        "Name": "Region to Share",
-        "Winget": {
-            "Id": "9N4066W2R5Q4"
-        }
+  {
+    "Name": "Windows Terminal",
+    "Winget": {
+      "Id": "9N0DX20HK701"
     }
-
+  },
+  {
+    "Name": "Windows Terminal Preview",
+    "Winget": {
+      "Id": "9N8G5RFZ9XK3"
+    }
+  },
+  {
+    "Name": "Powershell 7",
+    "Winget": {
+      "Id": "9MZ1SNWT0N5D"
+    }
+  },
+  {
+    "Name": "Starship",
+    "Winget": {
+      "Id": "Starship.Starship"
+    },
+    "Fonts": [
+      "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/FiraCode.zip",
+      "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/FiraMono.zip"
+    ]
+  },
+  {
+    "Name": "Visual Studio Code",
+    "Winget": {
+      "Id": "Microsoft.VisualStudioCode"
+    }
+  },
+  {
+    "Name": "Volta",
+    "Winget": {
+      "Id": "Volta.Volta"
+    },
+    "EnvVars": {
+      "VOLTA_FEATURE_PNPM": "1"
+    }
+  },
+  {
+    "Name": "7-Zip",
+    "Winget": {
+      "Id": "7zip.7zip"
+    }
+  },
+  {
+    "Name": "JetBrains Toolbox",
+    "Winget": {
+      "Id": "JetBrains.Toolbox"
+    }
+  },
+  {
+    "Name": "Logitech Unifying Software",
+    "Winget": {
+      "Id": "Logitech.UnifyingSoftware"
+    }
+  },
+  {
+    "Name": "Firefox",
+    "Winget": {
+      "Id": "9NZVDKPMR9RD"
+    }
+  },
+  {
+    "Name": "Nextcloud",
+    "Winget": {
+      "Id": "Nextcloud.NextcloudDesktop"
+    }
+  },
+  {
+    "Name": "Notepad++",
+    "Winget": {
+      "Id": "Notepad++.Notepad++"
+    }
+  },
+  {
+    "Name": "Microsoft PowerToys",
+    "Winget": {
+      "Id": "XP89DCGQ3K6VLD"
+    }
+  },
+  {
+    "Name": "Microsoft Remote Desktop",
+    "Winget": {
+      "Id": "9WZDNCRFJ3PS"
+    }
+  },
+  {
+    "Name": "Spotify",
+    "Winget": {
+      "Id": "9NCBCSZSJRSB"
+    }
+  },
+  {
+    "Name": "Telegram",
+    "Winget": {
+      "Id": "Telegram.TelegramDesktop"
+    }
+  },
+  {
+    "Name": "WinDirStat",
+    "Winget": {
+      "Id": "WinDirStat.WinDirStat"
+    }
+  },
+  {
+    "Name": "Region to Share",
+    "Winget": {
+      "Id": "9N4066W2R5Q4"
+    }
+  },
+  {
+    "Name": "Sysinternals Suite",
+    "Winget": {
+      "Id": "9P7KNL5RWT25"
+    }
+  },
+  {
+    "Name": "Enpass Password Manager",
+    "Winget": {
+      "Id": "9NJ3KMH29VGJ"
+    }
+  },
+  {
+    "Name": "AltDrag",
+    "Winget": {
+      "Id": "AltDrag.AltDrag"
+    }
+  },
+  {
+    "Name": "Deno",
+    "Winget": {
+      "Id": "DenoLand.Deno"
+    }
+  },
+  {
+    "Name": "MKCert",
+    "Winget": {
+      "Id": "FiloSottile.mkcert"
+    }
+  },
+  {
+    "Name": "Git",
+    "Winget": {
+      "Id": "Git.Git"
+    }
+  },
+  {
+    "Name": "NVDA",
+    "Winget": {
+      "Id": "NVAccess.NVDA"
+    }
+  },
+  {
+    "Name": "Postman",
+    "Winget": {
+      "Id": "Postman.Postman"
+    }
+  },
+  {
+    "Name": "Rustup",
+    "Winget": {
+      "Id": "Rustlang.Rustup"
+    }
+  },
+  {
+    "Name": "SteelSeries GG",
+    "Winget": {
+      "Id": "SteelSeries.GG"
+    }
+  },
+  {
+    "Name": "ZOxide",
+    "Winget": {
+      "Id": "ajeetdsouza.zoxide"
+    }
+  },
+  {
+    "Name": "fzf fuzzy finder",
+    "Winget": {
+      "Id": "junegunn.fzf"
+    }
+  },
+  {
+    "Name": "Elgato StreamDeck",
+    "Winget": {
+      "Id": "Elgato.StreamDeck"
+    }
+  },
+  {
+    "Name": "GLab Gitlab CLI",
+    "Winget": {
+      "Id": "GLab.GLab"
+    }
+  },
+  {
+    "Name": "Zoom",
+    "Winget": {
+      "Id": "Zoom.Zoom"
+    }
+  },
+  {
+    "Name": "Google Chrome",
+    "Winget": {
+      "Id": "Google.Chrome"
+    }
+  }
 ]
