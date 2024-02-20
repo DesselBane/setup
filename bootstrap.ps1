@@ -31,6 +31,7 @@ try {
 
   Write-Host "Installing Git"
   winget install Git.Git --accept-package-agreements --accept-source-agreements
+  ReloadPathEnvironment
 
   Write-Host "Cloning repo"
   git clone https://github.com/DesselBane/setup.git
