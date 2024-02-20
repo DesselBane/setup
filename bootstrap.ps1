@@ -2,54 +2,6 @@ function ReloadPathEnvironment {
   $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
 }
 
-function setupGit {
-  Write-Host "Installing git"
-  winget install Git.Git
-
-  Write-Host "Installing OpenSSH Client"
-  Add-WindowsCapability -Online -Name OpenSSH.Client*
-
-  Write-Host "Installing OpenSSH Server"
-  Add-WindowsCapability -Online -Name OpenSSH.Server*
-
-  Write-Host "Adding OpenSSH to Path"
-  ReloadPathEnvironment
-  [Environment]::SetEnvironmentVariable("Path", $env:Path + ";C:\Windows\System32\OpenSSH", [System.EnvironmentVariableTarget]::Machine)
-  $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine")
-  ReloadPathEnvironment
-
-  Write-Host "Setting up SSH-Agent"
-  Get-Service ssh-agent | Set-Service -StartupType Automatic -PassThru | Start-Service
-
-  Write-Host "Create git ssh folder"
-  $gitSSHFolder = New-Item -ItemType Directory -Path ~/.ssh-git
-  $gitSSHPrivateKeyPath = Join-Path $gitSSHFolder id_ed25519
-
-  Write-Host "Creating SSH Key"
-  ssh-keygen -t ed25519 -C "Git Key" -f  $gitSSHPrivateKeyPath
-
-  $publicKey = Get-Content "$gitSSHPrivateKeyPath.pub"
-  Write-Host "Public Key, you need to add this to your github/gitlab profile"
-  Write-Host $publicKey
-
-  Read-Host "Press [enter] to continue..."
-
-  Write-Host "Adding SSH Private Key to SSH-Agent"
-  ssh-add $gitSSHPrivateKeyPath
-
-  $secretsGitConfig = @"
-[core]
-  sshCommand = C:/Windows/System32/OpenSSH/ssh.exe
-[user]
-  signingKey = $gitSSHPrivateKeyPath
-"@
-
-  Write-Host "Saving secrets in home folder as secrets.gitconfig"
-  Write-Output $secretsGitConfig > ~/secrets.gitconfig
-
-  Write-Host ~/secrets.gitconfig
-}
-
 Write-Host "Bootstraping Windows, hold on to your socks"
 
 $tempDir = Join-Path $([System.IO.Path]::GetTempPath()) $([System.Guid]::NewGuid())
@@ -77,8 +29,8 @@ try {
     Return -1
   }
 
-
-  setupGit
+  Write-Host "Installing Git"
+  winget install Git.Git --accept-package-agreements --accept-source-agreements
 
   Write-Host "Cloning repo"
   git clone https://github.com/DesselBane/setup.git
@@ -94,6 +46,7 @@ try {
   SetupFromConfig .\program.config.json
 }
 finally {
-  Write-Host "Removing temp dir"
+  Write-Host "Removing temp dir: $tempDir"
+  Set-Location ~
   Remove-Item -Path $tempDir -Recurse -Force
 }
