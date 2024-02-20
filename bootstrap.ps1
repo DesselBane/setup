@@ -13,16 +13,13 @@ function setupGit {
   Add-WindowsCapability -Online -Name OpenSSH.Server*
 
   Write-Host "Adding OpenSSH to Path"
+  ReloadPathEnvironment
   [Environment]::SetEnvironmentVariable("Path", $env:Path + ";C:\Windows\System32\OpenSSH", [System.EnvironmentVariableTarget]::Machine)
   $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine")
-
   ReloadPathEnvironment
 
   Write-Host "Setting up SSH-Agent"
   Get-Service ssh-agent | Set-Service -StartupType Automatic -PassThru | Start-Service
-
-  Write-Host "Starting SSH-AGent service"
-  & start-ssh-agent.cmd
 
   Write-Host "Create git ssh folder"
   $gitSSHFolder = New-Item -ItemType Directory -Path ~/.ssh-git
@@ -34,6 +31,8 @@ function setupGit {
   $publicKey = Get-Content "$gitSSHPrivateKeyPath.pub"
   Write-Host "Public Key, you need to add this to your github/gitlab profile"
   Write-Host $publicKey
+
+  Read-Host "Press [enter] to continue..."
 
   Write-Host "Adding SSH Private Key to SSH-Agent"
   ssh-add $gitSSHPrivateKeyPath
