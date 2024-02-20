@@ -50,7 +50,7 @@ function SetupSSHForGit {
 "@
 
     Write-Host "Saving secrets in home folder as secrets.gitconfig"
-    Write-Output $secretsGitConfig > ~/secrets.gitconfig
+    $secretsGitConfig | Out-File -Encoding utf8 -FilePath ~/secrets.gitconfig
 
     Write-Host ~/secrets.gitconfig
 
@@ -59,7 +59,7 @@ function SetupSSHForGit {
     path = secrets.gitconfig
 "@
     Write-Host "Including secrets in .gitconfig for the moment"
-    Write-Output $gitconfig > ~/.gitconfig
+    $gitconfig | Out-File -Encoding utf8 -FilePath ~/.gitconfig
     Write-Host ~/.gitconfig
 }
 
