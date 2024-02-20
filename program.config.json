@@ -145,12 +145,6 @@
     }
   },
   {
-    "Name": "Git",
-    "Winget": {
-      "Id": "Git.Git"
-    }
-  },
-  {
     "Name": "NVDA",
     "Winget": {
       "Id": "NVAccess.NVDA"
