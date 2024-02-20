@@ -27,11 +27,13 @@ function SetupSSHForGit {
     Get-Service ssh-agent | Set-Service -StartupType Automatic -PassThru | Start-Service
 
     Write-Host "Create git ssh folder"
-    $gitSSHFolder = New-Item -ItemType Directory -Path ~/.ssh-git
-    $gitSSHPrivateKeyPath = Join-Path $gitSSHFolder id_ed25519
+    $gitSSHBareFolderName = "~/.ssh-git"
+    $gitSSHFolder = New-Item -ItemType Directory -Path $gitSSHBareFolderName
+    $gitSSHKeyName = "id_ed25519"
+    $gitSSHPrivateKeyPath = Join-Path $gitSSHFolder $gitSSHKeyName
 
     Write-Host "Creating SSH Key"
-    ssh-keygen -t ed25519 -C "Git Key" -f  $gitSSHPrivateKeyPath
+    ssh-keygen -t ed25519 -C "Git Key" -f $gitSSHPrivateKeyPath
 
     $publicKey = Get-Content "$gitSSHPrivateKeyPath.pub"
     Write-Host "Public Key, you need to add this to your github/gitlab profile"
@@ -44,13 +46,21 @@ function SetupSSHForGit {
 [core]
     sshCommand = C:/Windows/System32/OpenSSH/ssh.exe
 [user]
-    signingKey = $gitSSHPrivateKeyPath
+    signingKey = $gitSSHBareFolderName/$gitSSHKeyName
 "@
 
     Write-Host "Saving secrets in home folder as secrets.gitconfig"
     Write-Output $secretsGitConfig > ~/secrets.gitconfig
 
     Write-Host ~/secrets.gitconfig
+
+    $gitconfig = @"
+[include]
+    path = secrets.gitconfig
+"@
+    Write-Host "Including secrets in .gitconfig for the moment"
+    Write-Output $gitconfig > ~/.gitconfig
+    Write-Host ~/.gitconfig
 }
 
 function SetupDotConfig {
@@ -58,7 +68,9 @@ function SetupDotConfig {
         return 0
     }
 
+    Set-Location $env:USERPROFILE
     git clone --bare git@github.com:DesselBane/config.git $env:USERPROFILE/.dotCfg
+    Read-Host "Debug stop"
     git --git-dir=$env:USERPROFILE/.dotCfg --work-tree=$env:USERPROFILE checkout master -f
 }
 
