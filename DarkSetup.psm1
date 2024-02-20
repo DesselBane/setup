@@ -2,6 +2,9 @@ Import-Module InteractiveMenu
 
 $choicesYesNo = '&Yes', '&No'
 
+function ReloadPathEnvironment {
+    $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
+}
 
 function SetupSSHForGit {
     if ($Host.UI.PromptForChoice("", 'Do you want to setup SSH for Git?', $choicesYesNo, 1) -ne 0) {
