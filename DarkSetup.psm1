@@ -70,8 +70,8 @@ function SetupDotConfig {
 
     Set-Location $env:USERPROFILE
     git clone --bare git@github.com:DesselBane/config.git $env:USERPROFILE/.dotCfg
-    Read-Host "Debug stop"
     git --git-dir=$env:USERPROFILE/.dotCfg --work-tree=$env:USERPROFILE checkout master -f
+    git --git-dir=$env:USERPROFILE/.dotCfg --work-tree=$env:USERPROFILE config --local status.showUntrackedFiles no
 }
 
 function Handle-Winget {
