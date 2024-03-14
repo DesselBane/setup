@@ -203,5 +203,11 @@
     "Winget": {
       "Id": "Google.Chrome"
     }
+  },
+  {
+    "Name": "JQ",
+    "Winget": {
+      "Id": "jqlang.jq"
+    }
   }
 ]
