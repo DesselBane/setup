@@ -181,6 +181,30 @@
     }
   },
   {
+    "Name": "JQ",
+    "Winget": {
+      "Id": "jqlang.jq"
+    }
+  },
+  {
+    "Name": "delta",
+    "Winget": {
+      "Id": "dandavison.delta"
+    }
+  },
+  {
+    "Name": "less",
+    "Winget": {
+      "Id": "jftuga.less"
+    }
+  },
+  {
+    "Name": "eza",
+    "Winget": {
+      "Id": "eza-community.eza"
+    }
+  },
+  {
     "Name": "Elgato StreamDeck",
     "Winget": {
       "Id": "Elgato.StreamDeck"
@@ -202,12 +226,6 @@
     "Name": "Google Chrome",
     "Winget": {
       "Id": "Google.Chrome"
-    }
-  },
-  {
-    "Name": "JQ",
-    "Winget": {
-      "Id": "jqlang.jq"
     }
   }
 ]
