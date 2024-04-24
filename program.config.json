@@ -205,6 +205,12 @@
     }
   },
   {
+    "Name": "bat",
+    "Winget": {
+      "Id": "sharkdp.bat"
+    }
+  },
+  {
     "Name": "Elgato StreamDeck",
     "Winget": {
       "Id": "Elgato.StreamDeck"
