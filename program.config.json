@@ -211,6 +211,12 @@
     }
   },
   {
+    "Name": "btop",
+    "Winget": {
+      "Id": "aristocratos.btop4win"
+    }
+  },
+  {
     "Name": "Elgato StreamDeck",
     "Winget": {
       "Id": "Elgato.StreamDeck"
