@@ -217,6 +217,18 @@
     }
   },
   {
+    "Name": "Lazy Git",
+    "Winget": {
+      "Id": "JesseDuffield.lazygit"
+    }
+  },
+  {
+    "Name": "Lazy Docker",
+    "Winget": {
+      "Id": "JesseDuffield.Lazydocker"
+    }
+  },
+  {
     "Name": "Elgato StreamDeck",
     "Winget": {
       "Id": "Elgato.StreamDeck"
