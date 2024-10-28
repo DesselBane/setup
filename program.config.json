@@ -251,5 +251,35 @@
     "Winget": {
       "Id": "Google.Chrome"
     }
+  },
+  {
+    "Name": "Zen Browser",
+    "winget": {
+      "Id": "Zen-Team.Zen-Browser"
+    }
+  },
+  {
+    "Name": "QMK Toolbox",
+    "winge": {
+      "Id": "QMK.QMKToolbox"
+    }
+  },
+  {
+    "Name": "AusweisApp",
+    "winget": {
+      "Id": "Governikus.AusweisApp2"
+    }
+  },
+  {
+    "Name": "Steam",
+    "winge": {
+      "Id": "Valve.Steam"
+    }
+  },
+  {
+    "Name": "Discord",
+    "winget":{
+      "Id": "Discord.Discord"
+    }
   }
 ]
